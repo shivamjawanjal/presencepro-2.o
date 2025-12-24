@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #343a40;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        p {
+            font-size: 16px;
+            margin-bottom: 25px;
+            color: #6c757d;
+            line-height: 1.5;
+        }
+        
+        .illustration {
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto 25px;
+        }
+        
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #0069d9;
+        }
+        
+        .tips {
+            margin-top: 25px;
+            font-size: 16px;
+            color: #6c757d;
+            text-align: left;
+        }
+        
+        .tips ul {
+            padding-left: 20px;
+        }
+        
+        .tips li {
+            margin-bottom: 10px;
+        }
+        
+        .connection-status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #f1f1f1;
+        }
+        
+        .signal-bars {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 15px 0;
+            align-items: flex-end;
+        }
+        
+        .bar {
+            width: 8px;
+            background-color: #dee2e6;
+            border-radius: 2px;
+        }
+        
+        /* Corrected signal bars - now ascending from left to right */
+        .bar:nth-child(1) { height: 10px; }
+        .bar:nth-child(2) { height: 15px; }
+        .bar:nth-child(3) { height: 20px; }
+        .bar:nth-child(4) { height: 25px; }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .tips {
+                font-size: 14px;
+            }
+            
+            .illustration {
+                max-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <h1>You're Offline</h1>
+        <p>It looks like you lost your internet connection. The content you're trying to access requires an internet connection.</p>
+        
+        <div class="signal-bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        
+        <button class="btn" onclick="window.location.reload()">Try Again</button>
+        
+        <div class="tips">
+            <h3>Troubleshooting Tips:</h3>
+            <ul>
+                <li>Check your Wi-Fi connection or cellular data</li>
+                <li>Try moving to an area with better signal</li>
+                <li>Restart your router or device</li>
+                <li>Check if airplane mode is turned off</li>
+            </ul>
+        </div>
+        
+        <div class="connection-status" id="status-message">
+            Checking connection...
+        </div>
+    </div>
+    
+    <script>
+        // Update status message
+        const statusMessage = document.getElementById('status-message');
+        
+        function updateStatus() {
+            if (navigator.onLine) {
+                statusMessage.innerHTML = "Connection detected! Reloading page...";
+                statusMessage.style.backgroundColor = "#d4edda";
+                statusMessage.style.color = "#155724";
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1500);
+            } else {
+                statusMessage.innerHTML = "Still offline. Waiting for connection...";
+                statusMessage.style.backgroundColor = "#f8d7da";
+                statusMessage.style.color = "#721c24";
+            }
+        }
+        
+        // Listen for online status changes
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+        
+        // Check connection status every 5 seconds
+        setInterval(updateStatus, 5000);
+        
+        // Run initial check
+        updateStatus();
+        
+        // Animate the signal bars correctly - ascending from left
+        const bars = document.querySelectorAll('.bar');
+        let count = 0;
+        
+        setInterval(function() {
+            // Reset all bars
+            bars.forEach(bar => bar.style.backgroundColor = "#dee2e6");
+            
+            // Determine how many bars to light up (0-4)
+            const activeBars = count % 5;
+            
+            // Light up the appropriate number of bars
+            for (let i = 0; i < activeBars; i++) {
+                bars[i].style.backgroundColor = "#007bff";
+            }
+            
+            count++;
+        }, 700);
+    </script>
+</body>
+</html>
