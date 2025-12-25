@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://presence-pro-front-end2.vercel.app/sitemap.xml
+Sitemap: https://presencepro.vercel.app/sitemap.xml
