@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://presencepro.sercel.app</loc>
+        <loc>https://presencepro.vercel.app</loc>
         <lastmod>2024-01-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://presencepro.sercel.app/dashboard</loc>
+        <loc>https://presencepro.vercel.app/dashboard</loc>
         <lastmod>2024-01-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://presencepro.sercel.app/contact</loc>
+        <loc>https://presencepro.vercel.app/contact</loc>
         <lastmod>2024-01-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://presencepro.sercel.app/about</loc>
+        <loc>https://presencepro.vercel.app/about</loc>
         <lastmod>2024-01-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
 </urlset>
+
 
